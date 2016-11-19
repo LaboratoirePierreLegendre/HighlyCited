@@ -9,8 +9,8 @@ def create_set(sheet):
     for rx in range(1, sheet.nrows):
         firstname = sheet.row(rx)[0].value
         lastname = sheet.row(rx)[1].value
-        affiliation = sheet.row(rx)[2].value
-        individual = lastname + "," + firstname + "," + affiliation
+        category = sheet.row(rx)[2].value
+        individual = lastname.strip() + "," + firstname.strip() #+ "," + category.strip()
         resultSet.add(individual)
     return resultSet
 
@@ -54,4 +54,4 @@ print ("Result set")
 # Use pprint now to pretty-print the set
 # I like to sort the results, so I put everything in a sorted() call
 # Modify at will...
-pprint.pprint( sorted( set2016.intersection( set2015 ).intersection( set2014 ) ) )
+pprint.pprint( sorted( set2016.intersection( set2015 ).intersection( set2014 ).intersection( set2001 ) ) )
