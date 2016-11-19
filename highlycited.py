@@ -2,15 +2,15 @@
 import xlrd
 import pprint
 
-def create_set(sheet):
+def create_set(sheet, categoryColum):
     "Fill out a set with the family name, first+middle name, and category (ignore affiliation for now)"
     resultSet = set()
     # Note: we skip the first line so we start at 1 (range is 0-based)
     for rx in range(1, sheet.nrows):
         firstname = sheet.row(rx)[0].value
         lastname = sheet.row(rx)[1].value
-        category = sheet.row(rx)[2].value
-        individual = lastname.strip() + "," + firstname.strip() #+ "," + category.strip()
+        category = sheet.row(rx)[categoryColum].value
+        individual = lastname.strip() + "," + firstname.strip() + "," + category.strip()
         resultSet.add(individual)
     return resultSet
 
@@ -44,10 +44,10 @@ print("sh2016 ({0}) has {1} rows and {2} columns".format(sh2016.name, sh2016.nro
 print("sh2016 Cell A1 is {0}".format(sh2016.cell_value(rowx=0, colx=0)))
 
 # Create our empty sets
-set2001 = create_set(sh2001)
-set2014 = create_set(sh2014)
-set2015 = create_set(sh2015)
-set2016 = create_set(sh2016)
+set2001 = create_set(sh2001, 3)
+set2014 = create_set(sh2014, 2)
+set2015 = create_set(sh2015, 2)
+set2016 = create_set(sh2016, 2)
 
 print ("\n")
 print ("Result set")
